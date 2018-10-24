@@ -5,7 +5,8 @@ Utils.insertCSS('@import url(https://api.tiles.mapbox.com/mapbox-gl-js/v0.43.0/m
 
 mapLayer.html = "<div id='map'></div>"
 mapElement = mapLayer.querySelector("#map")
-mapElement.style.height = Screen.height + 'px'
+mapElement.style.height = Framer.Device.screen.height + 'px'
+mapElement.style.width = Framer.Device.screen.width + 'px'
 
 #Token generated for access to data
 mapboxgl.accessToken = 'pk.eyJ1IjoicGVycmluZGVzaWduIiwiYSI6ImNqbjl3NnR4NjA2YXIzcW44cXoxcmIwMGMifQ.4zuRaWTefn599K9POZhznQ'
