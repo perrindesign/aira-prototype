@@ -1,7 +1,9 @@
+#MapBox GL JS Setup
 { mapboxgl } = require "npm"
 
 Utils.insertCSS('@import url(https://api.tiles.mapbox.com/mapbox-gl-js/v0.43.0/mapbox-gl.css)')
 
+#MapBox GL JS Setup
 mapLayer = new Layer
 	height: Screen.height
 	width: Screen.width
@@ -21,30 +23,29 @@ map = new mapboxgl.Map
 
 mapLayer.ignoreEvents = false
 
-map.on('load', function() {
-	map.loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Cat_silhouette.svg/400px-Cat_silhouette.svg.png', function(error, image) {
-		if (error) throw error;
-		map.addImage('cat', image);
-		map.addLayer({
-			"id": "points",
-			"type": "symbol",
-			"source": {
-				"type": "geojson",
-				"data": {
-					"type": "FeatureCollection",
-					"features": [{
-						"type": "Feature",
-						"geometry": {
-							"type": "Point",
-							"coordinates": [151.192,-33.888]
-						}
-					}]
-				}
-			},
-			"layout": {
-				"icon-image": "cat",
-				"icon-size": 0.25
-			}
-		});
-	});
-});
+map.on 'load', ->
+  map.loadImage 'images/StartDot.png', (error, image) ->
+    if error
+      throw error
+    map.addImage 'startdot', image
+    map.addLayer
+      'id': 'points'
+      'type': 'symbol'
+      'source':
+        'type': 'geojson'
+        'data':
+          'type': 'FeatureCollection'
+          'features': [ {
+            'type': 'Feature'
+            'geometry':
+              'type': 'Point'
+              'coordinates': [
+                151.192
+                -33.889
+              ]
+          } ]
+      'layout':
+        'icon-image': 'startdot'
+        'icon-size': 0.15
+    return
+  return
