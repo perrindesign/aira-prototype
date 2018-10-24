@@ -1,13 +1,3 @@
-default_w = 750
-default_h = 1334
-
-screen_width = Framer.Device.screen.width 
-screen_height = Framer.Device.screen.height
-
-ratio = screen_width / default_w
-
-Framer.Device.contentScale = ratio
-
 #MapBox GL JS Setup
 { mapboxgl } = require "npm"
 
@@ -26,10 +16,13 @@ map = new mapboxgl.Map
 	zoom: 14.91
 	center: [151.191719,-33.892273]
 	attributionControl: false
+	trackResize: true
 	# Add Mapbox style url
 	style: 'mapbox://styles/perrindesign/cjn9w8ey14gur2rnrzx55o14r'
 
 mapLayer.ignoreEvents = false
+
+map.resize()
 
 #Adding in the icons from our design
 map.on 'load', ->
