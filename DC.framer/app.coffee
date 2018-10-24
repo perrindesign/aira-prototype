@@ -14,9 +14,37 @@ mapboxgl.accessToken = 'pk.eyJ1IjoicGVycmluZGVzaWduIiwiYSI6ImNqbjl3NnR4NjA2YXIzc
 
 map = new mapboxgl.Map
 	container: mapElement
-	zoom: 12
-	center: [-77.01866, 38.888]
+	zoom: 14.91
+	center: [151.192,-33.888]
 	# Add Mapbox style url
 	style: 'mapbox://styles/perrindesign/cjn9w8ey14gur2rnrzx55o14r'
 
 mapLayer.ignoreEvents = false
+
+map.on('load', function() {
+	map.loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Cat_silhouette.svg/400px-Cat_silhouette.svg.png', function(error, image) {
+		if (error) throw error;
+		map.addImage('cat', image);
+		map.addLayer({
+			"id": "points",
+			"type": "symbol",
+			"source": {
+				"type": "geojson",
+				"data": {
+					"type": "FeatureCollection",
+					"features": [{
+						"type": "Feature",
+						"geometry": {
+							"type": "Point",
+							"coordinates": [151.192,-33.888]
+						}
+					}]
+				}
+			},
+			"layout": {
+				"icon-image": "cat",
+				"icon-size": 0.25
+			}
+		});
+	});
+});
