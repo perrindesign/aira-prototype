@@ -1,3 +1,13 @@
+default_w = 750
+default_h = 1334
+
+screen_width = Framer.Device.screen.width 
+screen_height = Framer.Device.screen.height
+
+ratio = screen_width / default_w
+
+Framer.Device.contentScale = ratio
+
 #MapBox GL JS Setup
 { mapboxgl } = require "npm"
 
@@ -72,5 +82,59 @@ map.on 'load', ->
         'icon-image': 'VertiportDot1'
         'icon-size': 0.15
     return
-  return
   
+  
+  map.loadImage 'images/VertiportDot2.png', (error, image) ->
+    if error
+      throw error
+    map.addImage 'VertiportDot2', image
+    map.addLayer
+      'id': 'points-vertiport2'
+      'type': 'symbol'
+      'source':
+        'type': 'geojson'
+        'data':
+          'type': 'FeatureCollection'
+          'features': [ {
+            'type': 'Feature'
+            'geometry':
+              'type': 'Point'
+              'coordinates': [
+                151.098205
+                -33.701126
+              ]
+          } ]
+      'layout':
+        'icon-image': 'VertiportDot2'
+        'icon-size': 0.15
+    return
+    
+  
+  map.loadImage 'images/DestinationDot.png', (error, image) ->
+    if error
+      throw error
+    map.addImage 'DestinationDot', image
+    map.addLayer
+      'id': 'points-destination'
+      'type': 'symbol'
+      'source':
+        'type': 'geojson'
+        'data':
+          'type': 'FeatureCollection'
+          'features': [ {
+            'type': 'Feature'
+            'geometry':
+              'type': 'Point'
+              'coordinates': [
+                151.095494
+                -33.703031
+              ]
+          } ]
+      'layout':
+        'icon-image': 'DestinationDot'
+        'icon-size': 0.15
+    return
+  return
+
+#Removing MapBox logo for educational prototyping reasons
+Utils.insertCSS "a.mapboxgl-ctrl-logo{display: none !important;}"
