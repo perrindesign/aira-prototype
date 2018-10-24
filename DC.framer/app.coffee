@@ -1,9 +1,14 @@
 #MapBox GL JS Setup
 { mapboxgl } = require "npm"
 
-Utils.insertCSS('@import url(https://api.tiles.mapbox.com/mapbox-gl-js/v0.43.0/mapbox-gl.css)')
+Utils.insertCSS('@import url(https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css)')
 
-mapLayer.html = "<div id='map'></div>"
+mapLayer = new Layer
+	ignoreEvents: false
+	width: Framer.Device.screen.height
+	height: Framer.Device.screen.width
+	html: "<div id='map'></div>"
+
 mapElement = mapLayer.querySelector("#map")
 mapElement.style.height = Framer.Device.screen.height + 'px'
 mapElement.style.width = Framer.Device.screen.width + 'px'
@@ -21,9 +26,6 @@ map = new mapboxgl.Map
 	# Add Mapbox style url
 	style: 'mapbox://styles/perrindesign/cjn9w8ey14gur2rnrzx55o14r'
 
-mapLayer.ignoreEvents = false
-
-map.resize()
 
 #Adding in the icons from our design
 map.on 'load', ->
