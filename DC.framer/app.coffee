@@ -221,7 +221,6 @@ mapbox.on 'load', ->
       'layout':
         'icon-image': 'OrangeTriangle'
         'icon-size': 0.4
-        'icon-allow-overlap' : false
     return
     
   mapbox.loadImage 'images/PurplePointer.png', (error, image) ->
@@ -247,7 +246,6 @@ mapbox.on 'load', ->
       'layout':
         'icon-image': 'PurpleTriangle'
         'icon-size': 0.4
-        'icon-allow-overlap' : false
     return
     
   mapbox.addLayer
@@ -356,6 +354,15 @@ mapbox.on 'load', ->
       'line-color': '#8D52FE'
       'line-width': 6
       'line-dasharray': [2, 3]
+  return
+
+Recenter.onClick (event, layer) ->
+  mapbox.flyTo 
+    center: [
+      151.191781
+      -33.892428
+    ]
+    zoom: 17.5
   return
 
 #Removing MapBox logo for educational prototyping reasons
