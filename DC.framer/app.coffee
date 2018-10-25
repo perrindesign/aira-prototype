@@ -11,8 +11,9 @@ mapbox = new mapboxgl.Map
 	container: map._element,
 	# copy and paste your own style or one of mapbox's default styles here
 	style: 'mapbox://styles/perrindesign/cjn9w8ey14gur2rnrzx55o14r'
-	zoom: 14.9
-	center: [151.191719,-33.892273]
+	zoom: 17.5
+	center: [151.191781,-33.892428]
+	bearing: 159.00
 	attributionControl: false
 
 #Getting arc set up
@@ -49,8 +50,6 @@ result =
     line
     curved
   ]
-
-
 
 #Adding in the icons from our design
 mapbox.on 'load', ->
@@ -172,6 +171,84 @@ mapbox.on 'load', ->
         'icon-size': 0.15
         'icon-allow-overlap' : true
     return
+  
+  mapbox.loadImage 'images/CurrentLocation.png', (error, image) ->
+    if error
+      throw error
+    mapbox.addImage 'CurrentLocation', image
+    mapbox.addLayer
+      'id': 'current-location'
+      'type': 'symbol'
+      'source':
+        'type': 'geojson'
+        'data':
+          'type': 'FeatureCollection'
+          'features': [ {
+            'type': 'Feature'
+            'geometry':
+              'type': 'Point'
+              'coordinates': [
+                151.191773
+                -33.892403
+              ]
+          } ]
+      'layout':
+        'icon-image': 'CurrentLocation'
+        'icon-size': 0.3
+        'icon-allow-overlap' : true
+    return
+    
+  mapbox.loadImage 'images/OrangePointer.png', (error, image) ->
+    if error
+      throw error
+    mapbox.addImage 'OrangeTriangle', image
+    mapbox.addLayer
+      'id': 'orange-triangle'
+      'type': 'symbol'
+      'source':
+        'type': 'geojson'
+        'data':
+          'type': 'FeatureCollection'
+          'features': [ {
+            'type': 'Feature'
+            'geometry':
+              'type': 'Point'
+              'coordinates': [
+                151.192025
+                -33.892943
+              ]
+          } ]
+      'layout':
+        'icon-image': 'OrangeTriangle'
+        'icon-size': 0.4
+        'icon-allow-overlap' : false
+    return
+    
+  mapbox.loadImage 'images/PurplePointer.png', (error, image) ->
+    if error
+      throw error
+    mapbox.addImage 'PurpleTriangle', image
+    mapbox.addLayer
+      'id': 'purple-triangle'
+      'type': 'symbol'
+      'source':
+        'type': 'geojson'
+        'data':
+          'type': 'FeatureCollection'
+          'features': [ {
+            'type': 'Feature'
+            'geometry':
+              'type': 'Point'
+              'coordinates': [
+                151.192283
+                -33.892226
+              ]
+          } ]
+      'layout':
+        'icon-image': 'PurpleTriangle'
+        'icon-size': 0.4
+        'icon-allow-overlap' : false
+    return
     
   mapbox.addLayer
     'id': 'route1'
@@ -204,7 +281,7 @@ mapbox.on 'load', ->
     'paint':
       'line-color': '#888'
       'line-width': 6
-      'line-dasharray': [1, 1]
+      'line-dasharray': [2, 3]
       
   mapbox.addLayer
     'id': 'route2'
@@ -233,7 +310,52 @@ mapbox.on 'load', ->
     'paint':
       'line-color': '#8D52FE'
       'line-width': 6
-      'line-dasharray': [1, 1]
+      'line-dasharray': [2, 3]
+      
+  mapbox.addLayer
+    'id': 'route3'
+    'type': 'line'
+    'source':
+      'type': 'geojson'
+      'data':
+        'type': 'Feature'
+        'properties': {}
+        'geometry':
+          'type': 'LineString'
+          'coordinates': [
+            [
+              151.098205
+              -33.701126
+            ]
+            [
+              151.097972
+              -33.702129
+            ]
+            [
+              151.096922
+              -33.702016
+            ]
+            [
+              151.097134
+              -33.702621
+            ]
+            [
+              151.096734
+              -33.702601
+            ]
+            [
+              151.096645
+              -33.703157
+            ]
+            [
+              151.095494
+              -33.703031
+            ]
+          ]
+    'paint':
+      'line-color': '#8D52FE'
+      'line-width': 6
+      'line-dasharray': [2, 3]
   return
 
 #Removing MapBox logo for educational prototyping reasons
