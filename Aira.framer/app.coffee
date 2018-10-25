@@ -176,7 +176,7 @@ mapbox.on 'load', ->
     if error
       throw error
     mapbox.addImage 'CurrentLocation', image
-    mapbox.addLayer
+    mapbox.addLayer 
       'id': 'current-location'
       'type': 'symbol'
       'source':
@@ -202,7 +202,7 @@ mapbox.on 'load', ->
     if error
       throw error
     mapbox.addImage 'OrangeTriangle', image
-    mapbox.addLayer
+    mapbox.addLayer {
       'id': 'orange-triangle'
       'type': 'symbol'
       'source':
@@ -221,13 +221,13 @@ mapbox.on 'load', ->
       'layout':
         'icon-image': 'OrangeTriangle'
         'icon-size': 0.4
-    return
+    , 'current-location'}
     
   mapbox.loadImage 'images/PurplePointer.png', (error, image) ->
     if error
       throw error
     mapbox.addImage 'PurpleTriangle', image
-    mapbox.addLayer
+    mapbox.addLayer {
       'id': 'purple-triangle'
       'type': 'symbol'
       'source':
@@ -246,7 +246,7 @@ mapbox.on 'load', ->
       'layout':
         'icon-image': 'PurpleTriangle'
         'icon-size': 0.4
-    return
+    , 'current-location'}
     
   mapbox.addLayer
     'id': 'route1'
